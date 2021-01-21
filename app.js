@@ -1,4 +1,5 @@
 const expess = require('express');
+const bodyParser = require('body-parser');
 
 const app = expess();
 
@@ -9,6 +10,15 @@ app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
   next();
 });
+
+app.use(bodyParser.json());
+
+app.post('/api/stuff', (req, res, next) => {
+    console.log(req.body);
+    res.status(201).json({
+        message: "Objet créé !"
+    })
+})
 
 app.use('/api/stuff', (req, res) => {
     const stuff = [
