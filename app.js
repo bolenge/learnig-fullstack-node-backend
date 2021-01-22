@@ -1,5 +1,16 @@
 const expess = require('express');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+
+// Connexion à la base de données
+mongoose.connect('mongodb+srv://bolenge:!!Deo1997!!@cluster0.aldck.mongodb.net/go_fullstack?retryWrites=true&w=majority', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}).then(() => {
+    console.log("Connexion à MongoDB réussie !");
+}).catch(() => {
+    console.log("Connexion à MongoDB a échoué !");
+})
 
 const app = expess();
 
