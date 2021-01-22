@@ -13,6 +13,7 @@ mongoose.connect('mongodb+srv://bolenge:!!Deo1997!!@cluster0.aldck.mongodb.net/g
 })
 
 const app = expess();
+const Thing = require('./models/Thing');
 
 // Ajout de CORS
 app.use((req, res, next) => {
@@ -25,10 +26,14 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 
 app.post('/api/stuff', (req, res, next) => {
-    console.log(req.body);
-    res.status(201).json({
-        message: "Objet créé !"
-    })
+    delete req.body._id;
+    const thing = new Thing({
+        ...req.body
+    });
+
+    thing.save().then(() => res.status(201).json({
+        message: "Objet enregistré !"
+    })).catch(error => res.status(400).json({error}))
 })
 
 app.use('/api/stuff', (req, res) => {
