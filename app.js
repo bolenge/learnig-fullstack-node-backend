@@ -36,27 +36,16 @@ app.post('/api/stuff', (req, res, next) => {
     })).catch(error => res.status(400).json({error}))
 })
 
-app.use('/api/stuff', (req, res) => {
-    const stuff = [
-        {
-            _id: '5djhd51d2s',
-            title: "Mon premier object",
-            description: "Les infos du premier objet",
-            imageUrl: 'https://cdn.pixabay.com/photo/2020/06/24/14/59/aircraft-5336532_960_720.jpg',
-            price: 4900,
-            userId: 'violet12345'
-        },
-        {
-            _id: '5djhd51d2s',
-            title: "Mon deuxieme object",
-            description: "Les infos du deuxieme objet",
-            imageUrl: 'https://cdn.pixabay.com/photo/2020/06/24/14/59/aircraft-5336532_960_720.jpg',
-            price: 2900,
-            userId: 'violet12345'
-        }
-    ];
+app.get('/api/stuff', (req, res) => {
+    Thing.find()
+        .then(things => res.status(200).json(things))
+        .catch(error => res.status(400).json({error}))
+})
 
-    res.status(200).json(stuff);
+app.get('/api/stuff/:id', (req, res) => {
+    Thing.findById(req.params.id)
+        .then(thing => res.status(200).json(thing))
+        .catch(error => res.status(404).json({error}))
 })
 
 module.exports = app
