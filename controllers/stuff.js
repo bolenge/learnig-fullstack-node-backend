@@ -14,7 +14,13 @@ exports.createThing = (req, res, next) => {
 }
 
 exports.modifyThing = (req, res) => {
-    Thing.updateOne({ _id: req.params.id }, { ...req.body, _id: req.params.id })
+    const thingObject = req.file ?
+        {
+            ...JSON.parse(req.body.thing),
+            imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+        } : { ...req.body };
+    
+    Thing.updateOne({ _id: req.params.id }, { ...thingObject, _id: req.params.id })
         .then(() => res.status(200).json({ message: "Objet modifié !" }))
         .catch(error => res.status(400).json({error}))
 }

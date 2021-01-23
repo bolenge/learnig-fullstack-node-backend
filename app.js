@@ -1,6 +1,7 @@
 const expess = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const path = require('path');
 
 // Connexion à la base de données
 mongoose.connect('mongodb+srv://bolenge:!!Deo1997!!@cluster0.aldck.mongodb.net/go_fullstack?retryWrites=true&w=majority', {
@@ -27,6 +28,7 @@ app.use((req, res, next) => {
 });
 
 app.use(bodyParser.json());
+app.use('/images', expess.static(path.join(__dirname, 'images')));
 
 // Routing
 app.use('/api/stuff', stuffRouter);
