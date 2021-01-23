@@ -16,6 +16,7 @@ const app = expess();
 
 // Routers
 const stuffRouter = require('./routes/stuff');
+const userRouter = require('./routes/user');
 
 // Ajout de CORS
 app.use((req, res, next) => {
@@ -29,5 +30,6 @@ app.use(bodyParser.json());
 
 // Routing
 app.use('/api/stuff', stuffRouter);
+app.use('/api/user', userRouter);
 
 module.exports = app
