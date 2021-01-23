@@ -30,6 +30,6 @@ app.use(bodyParser.json());
 
 // Routing
 app.use('/api/stuff', stuffRouter);
-app.use('/api/user', userRouter);
+app.use('/api/auth', userRouter);
 
 module.exports = app
