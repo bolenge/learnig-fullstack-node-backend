@@ -13,7 +13,9 @@ mongoose.connect('mongodb+srv://bolenge:!!Deo1997!!@cluster0.aldck.mongodb.net/g
 })
 
 const app = expess();
-const Thing = require('./models/Thing');
+
+// Routers
+const stuffRouter = require('./routes/stuff');
 
 // Ajout de CORS
 app.use((req, res, next) => {
@@ -25,6 +27,7 @@ app.use((req, res, next) => {
 
 app.use(bodyParser.json());
 
-
+// Routing
+app.use('/api/stuff', stuffRouter);
 
 module.exports = app
